@@ -36,11 +36,11 @@ public:
     };
 
     asymmetric_eddsa_cosigner_client(platform_service& cosigner_service, const cmp_key_persistency& key_persistency, preprocessing_persistency& preprocessing_persistency);
-    ~asymmetric_eddsa_cosigner_client();
+    virtual ~asymmetric_eddsa_cosigner_client() {}
 
-    virtual void start_signature_preprocessing(const std::string& tenant_id, const std::string& key_id, const std::string& request_id, uint32_t start_index, uint32_t count, uint32_t total_count, const std::set<uint64_t>& players_ids, 
+    void start_signature_preprocessing(const std::string& tenant_id, const std::string& key_id, const std::string& request_id, uint32_t start_index, uint32_t count, uint32_t total_count, const std::set<uint64_t>& players_ids, 
         std::vector<std::array<uint8_t, sizeof(commitments_sha256_t)>>& R_commitments);
-    virtual uint64_t eddsa_sign_offline(const std::string& key_id, const std::string& txid, const signing_data& data, const std::string& metadata_json, const std::set<std::string>& players, const std::set<uint64_t>& players_ids, uint64_t preprocessed_data_index,
+    uint64_t eddsa_sign_offline(const std::string& key_id, const std::string& txid, const signing_data& data, const std::string& metadata_json, const std::set<std::string>& players, const std::set<uint64_t>& players_ids, uint64_t preprocessed_data_index,
         const std::map<uint64_t, Rs_and_commitments>& Rs, std::vector<eddsa_signature>& partial_sigs);
 
 private:

@@ -41,10 +41,6 @@ asymmetric_eddsa_cosigner_client::preprocessing_persistency::~preprocessing_pers
 asymmetric_eddsa_cosigner_client::asymmetric_eddsa_cosigner_client(platform_service& cosigner_service, const cmp_key_persistency& key_persistency, preprocessing_persistency& preprocessing_persistency) : 
     asymmetric_eddsa_cosigner(cosigner_service, key_persistency), _preprocessing_persistency(preprocessing_persistency) {}
 
-asymmetric_eddsa_cosigner_client::~asymmetric_eddsa_cosigner_client()
-{
-}
-
 void asymmetric_eddsa_cosigner_client::start_signature_preprocessing(const std::string& tenant_id, const std::string& key_id, const std::string& request_id, uint32_t start_index, uint32_t count, uint32_t total_count, const std::set<uint64_t>& players_ids, 
     std::vector<std::array<uint8_t, sizeof(commitments_sha256_t)>>& R_commitments)
 {

@@ -4,6 +4,16 @@ project(mpc-lib LANGUAGES C CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+# Add options for UBSan and code coverage
+option(ENABLE_UBSAN "Enable Undefined Behavior Sanitizer" OFF)
+
+# Apply UBSan flags if enabled
+if(ENABLE_UBSAN)
+    message(STATUS "Enabling Undefined Behavior Sanitizer")
+    add_compile_options(-g -Og -fsanitize=undefined -fno-sanitize-recover=all)
+    add_link_options(-fsanitize=undefined -fno-sanitize-recover=all)
+endif()
+
 if(NOT TARGET OpenSSL::Crypto)
     set(OPENSSL_USE_STATIC_LIBS TRUE)
     add_compile_definitions(OPENSSL_API_COMPAT=0x10101000L)
